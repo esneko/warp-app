@@ -8,12 +8,30 @@ on:
 
 jobs:
   build:
+    strategy:
+      fail-fast: false
+      matrix:
+        target: 
+          - aarch64-unknown-linux-gnu
+          - i686-unknown-linux-gnu
+          - x86_64-unknown-linux-gnu
     runs-on: ubuntu-latest
-      name: Release build
-      uses: actions-rs/cargo@v1
-      with:
-        command: build
-        args: --release --all-features
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Setup Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+      - name: Install dependencies
+        run: |
+          rustup target add ${{ matrix.target }}
+      - name: Release build
+        uses: actions-rs/cargo@v1
+        with:
+          use-cross: true
+          command: build
+          args: --target ${{ matrix.target }} --release --all-features --target-dir=/tmp
 
   # Continuous Deployment to Fly.io
   # https://fly.io/docs/app-guides/continuous-deployment-with-github-actions/
