@@ -4,7 +4,7 @@ use warp::Filter;
 #[tokio::main]
 async fn main() {
   // Match any request and return hello world!
-  let routes = warp::any().map(|| "Hello Rust");
+  let routes = warp::any().map(|| "Hello warp");
 
   warp::serve(routes)
     // ipv6 + ipv6 any addr
