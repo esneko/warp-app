@@ -1,0 +1,9 @@
+[package]
+name = "warp-app"
+version = "0.1.0"
+authors = ["Andrejs Agejevs <esneko@gmail.com>"]
+edition = "2021"
+
+[dependencies]
+tokio = { version = "1", features = ["full"] }
+warp = "0.3.3"
