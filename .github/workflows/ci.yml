@@ -22,7 +22,7 @@ jobs:
         uses: dtolnay/rust-toolchain@master
         with:
           toolchain: stable
-          components: clippy, rustfmt
+          components: cross, rustfmt
       - name: Install dependencies
         run: |
           rustup target add ${{ matrix.target }}
