@@ -22,17 +22,14 @@ jobs:
         uses: dtolnay/rust-toolchain@master
         with:
           toolchain: stable
-          # components: clippy, rustfmt
+          components: clippy, rustfmt
       - name: Install dependencies
         run: |
           rustup target add ${{ matrix.target }}
       - name: Release build
-        uses: actions-rs/cargo@v1
-        with:
-          use-cross: true
-          command: build
-          args: --target ${{ matrix.target }} --release --all-features --target-dir=/tmp
-
+        run: cargo build --target ${{ matrix.target }} --release --all-features --target-dir=/tmp
+      - name: Check formatting
+        run: cargo fmt --all --check
   # Continuous Deployment to Fly.io
   # https://fly.io/docs/app-guides/continuous-deployment-with-github-actions/
   deploy:
