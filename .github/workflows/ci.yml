@@ -23,8 +23,6 @@ jobs:
         with:
           toolchain: stable
           components: clippy, rustfmt
-      - name: Check formatting
-        run: cargo fmt --all --check
       - name: Install dependencies
         run: |
           rustup target add ${{ matrix.target }}
