@@ -19,9 +19,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
       - name: Setup Rust
-        uses: actions-rs/toolchain@v1
+        uses: dtolnay/rust-toolchain@master
         with:
           toolchain: stable
+          # components: clippy, rustfmt
       - name: Install dependencies
         run: |
           rustup target add ${{ matrix.target }}
