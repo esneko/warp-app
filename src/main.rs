@@ -9,15 +9,15 @@ async fn main() {
   // GET /hello
   let hello = warp::path("hello").map(|| "Hello");
 
-  // GET /bye/:string
-  let bye = warp::path("echo")
+  // GET /echo/:string
+  let echo = warp::path("echo")
     .and(warp::path::param())
     .map(|name: String| format!("Echo: {}", name));
 
   let routes = warp::get().and(
     root
       .or(hello)
-      .or(bye),
+      .or(echo),
   );
 
   warp::serve(routes)
