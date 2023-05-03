@@ -4,15 +4,15 @@ use warp::Filter;
 #[tokio::main]
 async fn main() {
   // GET /
-  let root = warp::path::end().map(|| "Hello root");
+  let root = warp::path::end().map(|| "Root");
 
   // GET /hello
-  let hello = warp::path("hello").map(|| "Hello world");
+  let hello = warp::path("hello").map(|| "Hello");
 
   // GET /bye/:string
-  let bye = warp::path("bye")
+  let bye = warp::path("echo")
     .and(warp::path::param())
-    .map(|name: String| format!("Bye {}", name));
+    .map(|name: String| format!("Echo: {}", name));
 
   let routes = warp::get().and(
     root
